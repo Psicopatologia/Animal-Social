@@ -24,7 +24,7 @@ router.use((req, res, next) => {
 })
 
 router.get('/profile', (req, res) => {
-    res.send("holi")
+    res.render('profile')
 })
 
 module.exports = router;
