@@ -28,10 +28,16 @@ const signinPost = passport.authenticate('local_signin', {
     passReqToCallback: true
 });
 
+const logout = (req, res) => {
+    req.logout();
+    res.redirect('/');
+};
+
 module.exports = {
     index,
     signupGet,
     signupPost,
     signinGet,
-    signinPost
+    signinPost,
+    logout
 }
