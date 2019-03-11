@@ -19,12 +19,14 @@ const signupPost = passport.authenticate('local_signup', {
 });
 
 const signinGet = (req, res) => {
-    
+    res.render('signin');
 };
 
-const signinPost = (req, res) => {
-    
-};
+const signinPost = passport.authenticate('local_signin', {
+    successRedirect: '/',
+    failureRedirect: '/signin',
+    passReqToCallback: true
+});
 
 module.exports = {
     index,

@@ -1,0 +1,17 @@
+<% title = 'Signin' %>
+
+<% include head %>
+
+<form action="/signin" method="POST">
+    <label for="email">email</label>
+    <input type="email" name="email">
+    <label for="password">password</label>
+    <input type="password" name="password">
+    
+    <button type="submit">Signin</button>
+</form>
+<% if (signinMessage) { %>
+    <div><%=signinMessage %></div>
+<% } %>
+
+<% include foot %>

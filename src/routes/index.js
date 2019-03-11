@@ -9,7 +9,7 @@ router.get('/signup', indexControllers.signupGet);
 
 router.post('/signup', indexControllers.signupPost);
 
-router.get('/signin', indexControllers.signinPost);
+router.get('/signin', indexControllers.signinGet);
 
 router.post('/signin', indexControllers.signinPost);
 
