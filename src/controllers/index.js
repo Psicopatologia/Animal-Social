@@ -5,11 +5,13 @@ const index = (req, res) => {
 };
 
 const signupGet = (req, res) => {
-    
+    res.render('signup', {
+        title: 'Signup'
+    })
 };
 
 const signupPost = (req, res) => {
-    
+    console.log(req.body);
 };
 
 const signinGet = (req, res) => {
