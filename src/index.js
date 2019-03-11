@@ -1,6 +1,6 @@
 const express = require('express');
 const routes = require('./routes/index');
-const path = require('path'); 
+const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs')
 
 // Middlewares
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: 'AnimalSocialSessionXD',
     resave: false,

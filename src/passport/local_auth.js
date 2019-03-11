@@ -13,14 +13,14 @@ passport.deserializeUser(async (id, done) => {
 });
 
 passport.use('local_signup', new LocalStrategy({
-    usernameField:'email',
+    usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, email, password, done) => {
-    const user = await User.findOne({email: email});
+    const user = await User.findOne({ email: email });
     if (user) {
         return done(null, false, req.flash('signupMessage',
-        'The email is already registered.'))
+            'The email is already registered.'))
     } else {
         const newUser = new User();
         newUser.email = email;
@@ -32,16 +32,16 @@ passport.use('local_signup', new LocalStrategy({
 }));
 
 passport.use('local_signin', new LocalStrategy({
-    usernameField:'email',
+    usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, email, password, done) => {
-    const user = await User.findOne({email: email});
-    if(!user) {
-      return done(null, false, req.flash('signinMessage', 'No User Found'));
+    const user = await User.findOne({ email: email });
+    if (!user) {
+        return done(null, false, req.flash('signinMessage', 'No User Found'));
     }
-    if(!user.comparePassword(password)) {
-      return done(null, false, req.flash('signinMessage', 'Incorrect Password'));
+    if (!user.comparePassword(password)) {
+        return done(null, false, req.flash('signinMessage', 'Incorrect Password'));
     }
     return done(null, user);
 }));
