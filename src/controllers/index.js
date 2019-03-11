@@ -1,3 +1,5 @@
+const passport = require('passport');
+
 const index = (req, res) => {
     res.render('index', {
         title: 'Animal Social xd'
@@ -10,9 +12,11 @@ const signupGet = (req, res) => {
     })
 };
 
-const signupPost = (req, res) => {
-    console.log(req.body);
-};
+const signupPost = passport.authenticate('local_signup', {
+    successRedirect: '/',
+    failureRedirect: '/signup',
+    passReqToCallback: true
+});
 
 const signinGet = (req, res) => {
     
