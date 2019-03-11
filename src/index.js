@@ -1,7 +1,10 @@
 const express = require('express');
-const app = express();
 const routes = require('./routes/index');
 const path = require('path'); 
+
+// Initializations
+const app = express();
+require('./database');
 
 // Settings
 app.set('port', process.env.PORT || 3000);
