@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
-const routes = require('./routes/index')
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
+const routes = require('./routes/index');
 
 // Settings
 app.set('port', process.env.PORT || 3000);
@@ -11,22 +9,6 @@ app.set('view engine', 'ejs')
 
 // Routes
 app.use(routes);
-
-// Database conection url
-const url = 'mongodb://localhost:27017';
-
-// Database name
-const dbName = 'ASdb';
-
-// Conect to mongodb server
-MongoClient.connect(url,{ useNewUrlParser: true },(err,client) => {
-    assert.equal(null, err);
-    console.log("Connected successfully to database server");
-
-    const db = client.db(dbName);
-
-    client.close();
-})
 
 // Static files
 app.use(express.static('public'));
