@@ -4,6 +4,26 @@ const index = (req, res) => {
     })
 };
 
+const signupGet = (req, res) => {
+    
+};
+
+const signupPost = (req, res) => {
+    
+};
+
+const signinGet = (req, res) => {
+    
+};
+
+const signinPost = (req, res) => {
+    
+};
+
 module.exports = {
-    index
+    index,
+    signupGet,
+    signupPost,
+    signinGet,
+    signinPost
 }
