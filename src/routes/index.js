@@ -24,7 +24,7 @@ router.use((req, res, next) => {
 })
 
 router.get('/profile', (req, res) => {
-    res.render('profile')
+    res.render('pages/profile')
 })
 
 module.exports = router;
