@@ -1,15 +1,11 @@
 const passport = require('passport');
 
 const index = (req, res) => {
-    res.render('index', {
-        title: 'Animal Social xd'
-    })
+    res.render('pages/index')
 };
 
 const signupGet = (req, res) => {
-    res.render('signup', {
-        title: 'Signup'
-    })
+    res.render('pages/signup')
 };
 
 const signupPost = passport.authenticate('local_signup', {
@@ -19,7 +15,7 @@ const signupPost = passport.authenticate('local_signup', {
 });
 
 const signinGet = (req, res) => {
-    res.render('signin');
+    res.render('pages/signin');
 };
 
 const signinPost = passport.authenticate('local_signin', {

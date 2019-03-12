@@ -1,0 +1,9 @@
+<nav>
+    <% if (!user) { %>
+    <a href="/signin">signin</a>
+    <a href="/signup">signup</a>
+    <% } else {%>
+    <a href="/profile">Profile</a>
+    <a href="/logout">Logout</a>
+    <% }%>
+</nav>
