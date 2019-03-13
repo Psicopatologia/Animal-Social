@@ -29,11 +29,16 @@ const logout = (req, res) => {
     res.redirect('/');
 };
 
+const profile = (req, res) => {
+    res.redirect('pages/profile')
+}
+
 module.exports = {
     index,
     signupGet,
     signupPost,
     signinGet,
     signinPost,
-    logout
+    logout,
+    profile
 }

@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 app.use(routes);
 
 // Static files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Start the server
 app.listen(app.get('port'), () => {

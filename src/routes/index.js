@@ -15,16 +15,14 @@ router.post('/signin', indexControllers.signinPost);
 
 router.get('/logout', indexControllers.logout)
 
-router.use((req, res, next) => {
+router.get('/profile', isAut, indexControllers.profile)
+
+function isAut(req,res) {
     if (req.isAuthenticated()) {
         next();
     } else {
         res.redirect('/');
     }
-})
-
-router.get('/profile', (req, res) => {
-    res.render('pages/profile')
-})
+}
 
 module.exports = router;
