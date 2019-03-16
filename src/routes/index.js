@@ -17,7 +17,7 @@ router.get('/logout', indexControllers.logout)
 
 router.get('/profile', isAut, indexControllers.profile)
 
-function isAut(req,res) {
+function isAut(req,res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {
