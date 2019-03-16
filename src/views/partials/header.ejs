@@ -1,9 +1,28 @@
 <nav>
-    <% if (!user) { %>
-    <a href="/signin">signin</a>
-    <a href="/signup">signup</a>
-    <% } else {%>
-    <a href="/profile">Profile</a>
-    <a href="/logout">Logout</a>
-    <% }%>
+    <span class="navbar-toggle" id="js-navbar-toggle">
+        <i class="fas fa-bars"></i>
+    </span>
+    <a href="/" class="logo">Animal Social</a>
+
+    <ul class="main-nav" id="js-menu">
+        <% if (!user) { %>
+        <li>
+            <a href="/signin">signin</a>
+        </li>
+        <li>
+            <a href="/signup">signup</a>
+        </li>
+        <% } else {%>
+        <li>
+            <a href="/profile">Profile</a>
+        </li>
+        <li>
+            <a href="/logout">Logout</a>
+        </li>
+        <% }%>
+    </ul>
+
+
+
+
 </nav>
