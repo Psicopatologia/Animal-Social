@@ -30,7 +30,7 @@ const logout = (req, res) => {
 };
 
 const profile = (req, res) => {
-    res.redirect('pages/profile')
+    res.render('pages/profile')
 }
 
 module.exports = {
