@@ -1,28 +1,26 @@
-<nav>
-    <span class="navbar-toggle" id="js-navbar-toggle">
-        <i class="fas fa-bars"></i>
-    </span>
-    <a href="/" class="logo">Animal Social</a>
-
-    <ul class="main-nav" id="js-menu">
-        <% if (!user) { %>
-        <li>
-            <a href="/signin">signin</a>
-        </li>
-        <li>
-            <a href="/signup">signup</a>
-        </li>
-        <% } else {%>
-        <li>
-            <a href="/profile">Profile</a>
-        </li>
-        <li>
-            <a href="/logout">Logout</a>
-        </li>
-        <% }%>
-    </ul>
-
-
-
-
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a href="/" class="navbar-brand">Animal Social</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <% if (!user) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/signin">signin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">signup</a>
+            </li>
+            <% } else {%>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            <% }%>
+        </ul>
+    </div>
 </nav>
