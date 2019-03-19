@@ -15,7 +15,7 @@ router.post('/signin', indexControllers.signinPost);
 
 router.get('/logout', indexControllers.logout)
 
-router.get('/profile', isAut, indexControllers.profile)
+router.get('/u/:userName', indexControllers.profiles) 
 
 function isAut(req,res, next) {
     if (req.isAuthenticated()) {
