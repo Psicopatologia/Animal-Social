@@ -1,15 +1,20 @@
 <% title = 'Profile' %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<% include ../partials/head %>
+    <% include ../partials/head %>
 </head>
+
 <body>
-    <% include ../partials/header %>
-    
-    <h1>Bienvenido</h1>
-    <p><%= user.email %></p>
-    
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <main class="container">
+        <h1>Perfil de:</h1>
+        <p><%= email %></p>
+    </main>
     <% include ../partials/foot %>
 </body>
+
 </html>
