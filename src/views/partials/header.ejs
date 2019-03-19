@@ -19,7 +19,7 @@
             </li>
             <% } else {%>
             <li class="nav-item">
-                <a class="nav-link <% if(title == 'Profile') {%>active<%}%>" href="/profile">
+                <a class="nav-link <% if(title == 'Profile') {%>active<%}%>" href="/u/<%=user.userName%>">
                     Profile
                 </a>
             </li>
