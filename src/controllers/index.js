@@ -15,7 +15,7 @@ const logout = (req, res) => {
 
 const profiles = (req, res, next) => {
     let userN = req.params.userName;
-    User.findOne({'userName': userN}, 'email', (err, user) => {
+    User.findOne({'userName': userN}, 'email name', (err, user) => {
         if (user)
             res.render('pages/profile', user);
         else
