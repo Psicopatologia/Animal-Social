@@ -13,11 +13,13 @@ router.get('/signin', indexControllers.signinGet);
 
 router.post('/signin', indexControllers.signinPost);
 
-router.get('/logout', indexControllers.logout)
+router.get('/logout', indexControllers.logout);
 
-router.get('/u/:userName', indexControllers.profiles) 
+router.get('/u/:userName', indexControllers.profiles);
 
-function isAut(req,res, next) {
+router.get('/business', isAuth, indexControllers.business);
+
+function isAuth(req,res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {

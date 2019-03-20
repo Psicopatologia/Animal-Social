@@ -8,6 +8,8 @@ const signupGet = (req, res) => { res.render('pages/signup') };
 
 const signinGet = (req, res) => { res.render('pages/signin'); };
 
+const business = (req, res) => { res.render('pages/business') };
+
 const logout = (req, res) => {
     req.logout();
     res.redirect('/');
@@ -43,5 +45,6 @@ module.exports = {
     signinGet,
     signinPost,
     logout,
-    profiles
+    profiles,
+    business
 }
