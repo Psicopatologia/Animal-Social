@@ -4,10 +4,10 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+    <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto ">
             <% if (!user) { %>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link <%if(title=='Signin') {%>active<%}%>" href="/signin">
                     signin
                 </a>
@@ -18,19 +18,32 @@
                 </a>
             </li>
             <% } else {%>
-            <li class="dropdown nav-item" >
+            <li class=" dropdown nav-item">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <%= user.name %>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item <% if(title == 'Profile') {%>active<%}%>" href="/u/<%=user.userName%>">
+                            <svg class="svg-icon" viewBox="0 0 26.012 26.012">
+                                <path
+                                    d="m22.821 22.82h-19.629c0-5.4263 4.3941-9.8252 9.8145-9.8252 5.4204 0 9.8145 4.3989 9.8145 9.8252zm-4.9073-14.716a4.9072 4.9125 0 01-4.9072 4.9125 4.9072 4.9125 0 01-4.9072-4.9125 4.9072 4.9125 0 014.9072-4.9125 4.9072 4.9125 0 014.9072 4.9125z" />
+                            </svg>
                             Profile
                         </a>
-                        <a class="dropdown-item <% if(title == 'Business') {%>active<%}%>" href="/business">
+                        <a
+                            class="dropdown-item <% if(title == 'Business') {%>active<%}%>" href="/business">
+                            <svg class="svg-icon" viewBox="0 0 25.205 25.205">
+                                <path
+                                    d="m14.273 13.858a1.6706 1.1989 0 01-1.6706 1.1989 1.6706 1.1989 0 01-1.6706-1.1989 1.6706 1.1989 0 011.6706-1.1989 1.6706 1.1989 0 011.6706 1.1989zm-11.495.01789h8.1545m3.3392 0h8.1548m-11.956-9.5981c-.39562.002-.60355.20057-.60189.61908v1.8505h5.4677v-1.8504c.002-.41849-.20628-.61742-.6019-.61926-.0264-.00011-.0536.00077-.0816.003h-4.1007c-.028-.002-.0552-.003-.0816-.003zm-7.6923 2.5477h19.649v14.101h-19.649z"/>
+                            </svg>
                             Business
                         </a>
-                        <a class="dropdown-item <% if(title == 'Proile') {%>active<%}%>" href="/u/<%=user.userName%>">
+                        <a class="dropdown-item <% if(title == 'Settings') {%>active<%}%>" href="/u/<%=user.userName%>">
+                            <svg class="svg-icon" viewBox="0 0 24.585 25.259">
+                                <path
+                                    d="m17.243 12.63a4.9505 4.9505 0 01-4.9505 4.9505 4.9505 4.9505 0 01-4.9505-4.9505 4.9505 4.9505 0 014.9505-4.9505 4.9505 4.9505 0 014.9505 4.9505zm2.7033-1.9802-.83788-2.0354.97271-2.1979-1.5752-1.5752-2.1949.96975-2.0384-.83552-.86633-2.2466h-2.2277l-.86633 2.2472-2.0354.83787-2.1979-.97271-1.5752 1.5752.96974 2.1949-.83552 2.0384-2.2465.86633-1e-6 2.2277 2.2471.86633.83788 2.0354-.97261 2.1979 1.5752 1.5752 2.1949-.96975 2.0384.83552.86633 2.2466h2.2277l.86633-2.2471 2.0354-.83787 2.1979.97261 1.5752-1.5752-.96974-2.1949.83542-2.0384 2.2466-.86633v-2.2277z" />
+                            </svg>
                             Settings
                         </a>
                         <div class="dropdown-divider"></div>
