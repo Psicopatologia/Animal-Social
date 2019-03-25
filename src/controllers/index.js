@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Business = require('../models/Business');
 const passport = require('passport');
 
 // Get
@@ -38,6 +39,16 @@ const signinPost = passport.authenticate('local_signin', {
     passReqToCallback: true
 });
 
+const businessPost = (req, res) => {
+    const newBusiness = new Business();
+    newBusiness.name = req.body.name;
+    newBusiness.info = req.body.info;
+    newBusiness.address.city = req.body.city;
+    newBusiness.address.address = req.body.address;
+    newBusiness.save();
+    res.redirect('/');
+}
+
 module.exports = {
     index,
     signupGet,
@@ -46,5 +57,6 @@ module.exports = {
     signinPost,
     logout,
     profiles,
-    business
+    business,
+    businessPost
 }
