@@ -3,7 +3,25 @@ const Business = require('../models/Business');
 const passport = require('passport');
 
 // Get
-const index = (req, res) => { res.render('pages/index') };
+const index = (req, res) => {
+    let perPage = 12;
+    page = req.params.page || 1;
+
+    Business
+        .find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec((err, business) => {
+            Business.estimatedDocumentCount().exec((err, count) => {
+                if (err) console.log(err);
+                res.render('pages/index', {
+                    business: business,
+                    current: page,
+                    pages: Math.ceil(count / perPage),
+                });
+            });
+        });
+};
 
 const signupGet = (req, res) => { res.render('pages/signup') };
 
