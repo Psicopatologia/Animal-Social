@@ -21,6 +21,8 @@ router.get('/business', isAuth, indexControllers.business);
 
 router.post('/business', indexControllers.businessPost);
 
+router.get('/:page', indexControllers.index);
+
 function isAuth(req,res, next) {
     if (req.isAuthenticated()) {
         next();
