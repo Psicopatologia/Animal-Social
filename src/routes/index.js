@@ -7,7 +7,7 @@ router.get('/', indexControllers.index);
 
 router.get('/:page', indexControllers.index);
 
-router.get('/:lang', indexControllers.lang);
+router.get('/lang/:lang', indexControllers.lang);
 
 router.get('/signup', indexControllers.signupGet);
 
