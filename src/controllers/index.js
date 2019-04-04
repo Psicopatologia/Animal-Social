@@ -27,6 +27,12 @@ const index = (req, res, next) => {
         });
 };
 
+const lang = (req, res) => {
+    let lang = req.params.lang;
+    res.cookie('lang', lang, {expires: new Date(253402300000000)});
+    res.redirect('back');
+};
+
 const signupGet = (req, res) => { res.render('pages/signup') };
 
 const signinGet = (req, res) => { res.render('pages/signin'); };
@@ -80,5 +86,6 @@ module.exports = {
     logout,
     profiles,
     business,
-    businessPost
+    businessPost,
+    lang,
 }
