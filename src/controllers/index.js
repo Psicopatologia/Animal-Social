@@ -3,10 +3,14 @@ const Business = require('../models/Business');
 const passport = require('passport');
 
 // Get
-const index = (req, res) => {
-    let perPage = 12;
-    page = req.params.page || 1;
-
+const index = (req, res, next) => {
+    let perPage = 12
+    if (req.params.page) {
+        if (isNaN(req.params.page)) {
+            return next()
+        };
+    }
+    let page = req.params.page || 1;
     Business
         .find({})
         .skip((perPage * page) - perPage)
