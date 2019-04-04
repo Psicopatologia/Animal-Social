@@ -5,6 +5,10 @@ const indexControllers = require('../controllers/index')
 
 router.get('/', indexControllers.index);
 
+router.get('/:page', indexControllers.index);
+
+router.get('/:lang', indexControllers.lang);
+
 router.get('/signup', indexControllers.signupGet);
 
 router.post('/signup', indexControllers.signupPost);
@@ -20,8 +24,6 @@ router.get('/u/:userName', indexControllers.profiles);
 router.get('/business', isAuth, indexControllers.business);
 
 router.post('/business', indexControllers.businessPost);
-
-router.get('/:page', indexControllers.index);
 
 function isAuth(req,res, next) {
     if (req.isAuthenticated()) {
