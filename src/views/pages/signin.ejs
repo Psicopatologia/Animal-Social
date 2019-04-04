@@ -1,6 +1,6 @@
-<% title = 'Signin' %>
+<% title = __("signin") %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= locale %>">
 
 <head>
     <% include ../partials/head %>
@@ -11,23 +11,21 @@
     <% include ../partials/header %>
     <main class="container text-center mt-5">
         <form class="auth" action="/signin" method="POST">
-            <h1 class="h3">Sign in</h1>
+            <h1 class="h3"><%= __("signin") %></h1>
             <div class="form-group text-left">
-                <label for="email">email</label>
+                <label for="email"><%= __("email") %></label>
                 <input type="email" class="form-control" name="email" id="email" required autofocus>
             </div>
             <div class="form-group text-left">
-                <label for="password">password</label>
+                <label for="password"><%= __("password") %></label>
                 <input type="password" class="form-control" name="password" id="password" required>
             </div>
-
+            <button type="submit" class="btn btn-primary"><%= __("signin") %></button>
             <% if (signinMessage.length > 0) { %>
-            <div class="alert alert-danger" role="alert">
-                <%=signinMessage %>
+            <div class="alert alert-danger mt-3" role="alert">
+                <%= __(signinMessage[0]) %>
             </div>
             <% } %>
-
-            <button type="submit" class="btn btn-primary">Signin</button>
         </form>
     </main>
     <% include ../partials/foot %>
