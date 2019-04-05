@@ -1,6 +1,6 @@
 <% title = 'Animal Social' %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= locale %>">
 
 <head>
     <% include ../partials/head %>
@@ -11,7 +11,7 @@
         <% include ../partials/header %>
     </header>
     <main class="container mt-4">
-        <h1 class="h2 mb-4">Negocios</h1>
+        <h1 class="h2 mb-4"><%= __("Business") %></h1>
         <div class="row">
             <% for (var i = 0; i < business.length; i++) { %>
             <div class="col-md-4 mb-4">
