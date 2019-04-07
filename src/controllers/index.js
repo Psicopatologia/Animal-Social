@@ -76,7 +76,13 @@ const businessPost = (req, res) => {
     newBusiness.address.city = req.body.city;
     newBusiness.address.address = req.body.address;
     newBusiness.save();
-    res.redirect('/');
+    User.findByIdAndUpdate(
+        req.app.locals.user.id,
+        { $push: { business: { businessId: newBusiness.id} } },
+        { safe: true, upsert: true },
+        (err) => { console.log(err) }
+    );
+    res.redirect('back');
 }
 
 module.exports = {
