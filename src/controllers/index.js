@@ -69,6 +69,18 @@ const signinPost = passport.authenticate('local_signin', {
     passReqToCallback: true
 });
 
+const profilePost = (req, res) => {
+    User.findByIdAndUpdate(
+        req.app.locals.user.id,
+        {
+            name: req.body.name,
+            bio: req.body.bio
+        },
+        (err) => { if(err) console.log(err) }
+    );
+    res.redirect('back');
+}
+
 const businessPost = (req, res) => {
     const newBusiness = new Business();
     newBusiness.name = req.body.name;
@@ -97,4 +109,5 @@ module.exports = {
     businessPost,
     lang,
     settings,
+    profilePost,
 }
