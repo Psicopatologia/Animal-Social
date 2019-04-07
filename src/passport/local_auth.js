@@ -28,6 +28,7 @@ passport.use('local_signup', new LocalStrategy({
         newUser.name = req.body.name;
         newUser.password = newUser.encryptPassword(password);
         await newUser.save();
+        newUser.password = undefined;
         done(null, newUser);
     }
 
@@ -45,5 +46,6 @@ passport.use('local_signin', new LocalStrategy({
     if (!user.comparePassword(password)) {
         return done(null, false, req.flash('signinMessage', 'Incorrect Password'));
     }
+    user.password = undefined;
     return done(null, user);
 }));
