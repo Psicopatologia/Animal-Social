@@ -39,6 +39,8 @@ const signinGet = (req, res) => { res.render('pages/signin'); };
 
 const business = (req, res) => { res.render('pages/business') };
 
+const settings = (req, res) => { res.render('pages/settings') };
+
 const logout = (req, res) => {
     req.logout();
     res.redirect('/');
@@ -88,4 +90,5 @@ module.exports = {
     business,
     businessPost,
     lang,
+    settings,
 }
