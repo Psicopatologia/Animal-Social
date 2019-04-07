@@ -27,6 +27,8 @@ router.get('/business', isAuth, indexControllers.business);
 
 router.post('/business', indexControllers.businessPost);
 
+router.post('/profile', indexControllers.profilePost);
+
 function isAuth(req,res, next) {
     if (req.isAuthenticated()) {
         next();
