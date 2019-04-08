@@ -32,6 +32,8 @@ router.post('/profile', indexControllers.profilePost);
 
 router.post('/username', indexControllers.username);
 
+router.post('/password', indexControllers.password);
+
 function isAuth(req, res, next) {
     if (req.isAuthenticated()) {
         next();

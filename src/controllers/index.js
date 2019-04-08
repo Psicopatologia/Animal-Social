@@ -113,6 +113,20 @@ const username = (req, res) => {
     res.redirect('/settings#account');
 }
 
+const password = (req, res) => {
+    User.findById (req.app.locals.user.id, (err, user) => {
+        if (!user.comparePassword(req.body.oldPassword))
+            req.flash('passwordMessage', 'Incorrect Password');
+        else if (req.body.newPassword != req.body.newPassword2) {
+            req.flash('passwordMessage', 'passwords don\'t match');
+        } else {
+            user.password = user.encryptPassword(req.body.newPassword)
+            user.save();
+        }
+        res.redirect('/settings#account');
+    });
+}
+
 module.exports = {
     index,
     signupGet,
@@ -127,4 +141,5 @@ module.exports = {
     settings,
     profilePost,
     username,
+    password,
 }
