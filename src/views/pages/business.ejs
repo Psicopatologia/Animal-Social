@@ -1,44 +1,98 @@
-<% title = 'business' %>
+<% title = __('business') %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <% include ../partials/head %>
-    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/business.css">
 </head>
 
 <body>
-    <% include ../partials/header %>
-    <main class="container text-center mt-1">
-        <form style="max-width: 500px" class="auth" action="/business" method="POST">
-            <h1 class="h3">Create business</h1>
-            <div class="form-group text-left">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" name="name" id="name" required autofocus>
-            </div>
-            <div class="form-group text-left">
-                <label for="info">Info</label>
-                <textarea name="info" class="form-control" id="info" rows="3"></textarea>
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group  text-left">
-                        <label for="city">City</label>
-                        <input type="text" class="form-control" name="city" id="city" required>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group text-left">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" name="address" id="address" required>
-                    </div>
-                </div>
-            </div>
+    <header>
+        <div class="nav-top">
+            <% include ../partials/header %>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-columm">
+                        <li class="text-capitalize nav-item mt-2 mb-2">
+                            <a class="nav-link active" href="#" data-toggle="modal" data-target="#addBusiness">
+                                <svg class="svg-icon" viewBox="0 0 24.956 24.956">
+                                    <path d="m2.4782 12.478h20m-10-10v20" />
+                                </svg>
+                                <%= __("add business") %>
+                            </a>
 
-            <button type="submit" class="btn btn-primary">Create business</button>
-        </form>
-    </main>
-    <% include ../partials/foot %>
+                        </li>
+                        <div class="line-sidebar"></div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <svg class="svg-icon" viewBox="0 0 25.205 25.205">
+                                    <path
+                                        d="m14.273 13.858a1.6706 1.1989 0 01-1.6706 1.1989 1.6706 1.1989 0 01-1.6706-1.1989 1.6706 1.1989 0 011.6706-1.1989 1.6706 1.1989 0 011.6706 1.1989zm-11.495.01789h8.1545m3.3392 0h8.1548m-11.956-9.5981c-.39562.002-.60355.20057-.60189.61908v1.8505h5.4677v-1.8504c.002-.41849-.20628-.61742-.6019-.61926-.0264-.00011-.0536.00077-.0816.003h-4.1007c-.028-.002-.0552-.003-.0816-.003zm-7.6923 2.5477h19.649v14.101h-19.649z" />
+                                </svg>
+                                <%= __("business") %>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <h1>Business</h1>
+            </main>
+        </div>
+    </div>
+
+    <!-- <% include ../partials/foot %> -->
+    <!-- Modals -->
+    <div class="modal fade" id="addBusiness" tabindex="-1" role="dialog" aria-labelledby="addBusinessTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-capitalize" id="addBusinessTitle"><%= __("add business") %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/business" id="addBusinessForm" method="POST">
+                        <div class="form-group text-left">
+                            <label for="name"><%= __("name") %></label>
+                            <input type="text" class="form-control" name="name" id="name" required autofocus>
+                        </div>
+                        <div class="form-group text-left">
+                            <label for="info"><%= __("information") %></label>
+                            <textarea name="info" class="form-control" id="info" rows="3"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group  text-left">
+                                    <label for="city"><%= __("city") %></label>
+                                    <input type="text" class="form-control" name="city" id="city" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="address"><%= __("address") %></label>
+                                    <input type="text" class="form-control" name="address" id="address" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= __("close") %></button>
+                    <button type="submit" class="btn btn-primary" form="addBusinessForm">
+                        <%= __("add business") %>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
