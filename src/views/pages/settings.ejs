@@ -1,0 +1,90 @@
+<% title = __("settings") %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+    <header>
+        <% include ../partials/header %>
+        <script defer src="js/settings.js"></script>
+    </header>
+    <main class="container mt-3">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#profile" onclick="changeTabs('profile')"
+                    id="profileLink"><%= __("profile") %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#account" onclick="changeTabs('account')"
+                    id="accountLink"><%= __("account") %></a>
+            </li>
+        </ul>
+        <div class="text-capitalize container">
+            <form class="m-3" action="/profile" method="post" id="profile">
+                <div class="form-group">
+                    <label for="name"><%= __("name") %>:</label>
+                    <input type="text" class="form-control" name="name" id="name" value="<%= user.name%>">
+                </div>
+                <div class="form-group">
+                    <label for="bio"><%= __("biography ") %>:</label>
+                    <textarea class="form-control" name="bio" id="bio" cols="10" rows="3"><%= user.bio %></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><%= __("update") %></button>
+            </form>
+            <div id="account" class="d-none row">
+                <div class="col-md">
+                    <form class="m-3" action="/username" method="post">
+                        <label for="username"><%= __("username") %></label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend text-lowercase">
+                                <span class="input-group-text">/u/</span>
+                            </div>
+                            <input type="text" class="form-control" name="username" value="<%= user.userName %>"
+                                id="username">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <%= __("update") +" "+ __("username") %>
+                        </button>
+                        <% if (usernameMessage.length > 0) { %>
+                        <div class="alert alert-danger mt-3" role="alert">
+                            <%= __(usernameMessage[0]) %>
+                        </div>
+                        <% } %>
+                    </form>
+                </div>
+                <div class="col-md">
+                    <form action="/password" method="post" class="m-3">
+                        <div class="form-group">
+                            <label for="oldPassword"><%= __("old password") %></label>
+                            <input type="text" class="form-control" name="oldPassword" id="oldPassword">
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="newPassword"><%= __("new password") %></label>
+                                <input type="text" class="form-control" name="newPassword" id="newPassword">
+                            </div>
+                            <div class="col">
+                                <label for="newPassword2"><%= __("new password") %></label>
+                                <input type="text" class="form-control" name="newPassword2" id="newPassword2">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">
+                            <%= __("update") +" "+ __("password") %>
+                        </button>
+                        <% if (passwordMessage.length > 0) { %>
+                        <div class="alert alert-danger mt-3" role="alert">
+                            <%= __(passwordMessage[0]) %>
+                        </div>
+                        <% } %>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <% include ../partials/foot %>
+</body>
+
+</html>
