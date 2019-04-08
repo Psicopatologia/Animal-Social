@@ -11,6 +11,10 @@ body {
     padding-bottom: 50px;
 }
 
+.dropdown {
+    text-transform: capitalize;
+}
+
 .svg-icon {
     width: 1em;
     height: 1em;
