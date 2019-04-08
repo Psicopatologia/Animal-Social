@@ -38,6 +38,8 @@ app.use(i18n.init);
 app.use((req, res, next) => {
     app.locals.signupMessage = req.flash('signupMessage');
     app.locals.signinMessage = req.flash('signinMessage');
+    app.locals.usernameMessage = req.flash('usernameMessage');
+    app.locals.passwordMessage = req.flash('passwordMessage');
     app.locals.user = req.user;
     next();
 });
