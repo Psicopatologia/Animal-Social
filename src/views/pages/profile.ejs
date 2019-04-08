@@ -10,9 +10,12 @@
     <header>
         <% include ../partials/header %>
     </header>
-    <main class="container">
-        <h1>Perfil de <%= name %></h1>
-        <p><%= email %></p>
+    <main class="container mt-3">
+        <h1><%= name %></h1>
+        <hr>
+        <div class="bio">
+            <%= bio %>
+        </div>
     </main>
     <% include ../partials/foot %>
 </body>
