@@ -97,6 +97,22 @@ const businessPost = (req, res) => {
     res.redirect('back');
 }
 
+const username = (req, res) => {
+    let username = req.body.username;
+    User.findOne({$or: [{userName: username}, {id: username}]}, (err, user) => {
+        if (user) {
+            req.flash('usernameMessage', 'the username is already in use');
+        } else {
+            User.findByIdAndUpdate(
+                req.app.locals.user.id,
+                { userName: username },
+                (err) => { if(err) console.log(err) }
+            );
+        }
+    });
+    res.redirect('/settings#account');
+}
+
 module.exports = {
     index,
     signupGet,
@@ -110,4 +126,5 @@ module.exports = {
     lang,
     settings,
     profilePost,
+    username,
 }

@@ -30,6 +30,8 @@ router.post('/business', indexControllers.businessPost);
 
 router.post('/profile', indexControllers.profilePost);
 
+router.post('/username', indexControllers.username);
+
 function isAuth(req, res, next) {
     if (req.isAuthenticated()) {
         next();
