@@ -13,6 +13,7 @@ const index = (req, res, next) => {
     let page = req.params.page || 1;
     Business
         .find({})
+        .sort({ _id: -1 })
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec((err, business) => {
