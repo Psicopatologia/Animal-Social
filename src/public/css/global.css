@@ -25,6 +25,15 @@ body {
     fill: none
 }
 
+.svg-flag path {
+    stroke: none;
+    fill: white;
+}
+
+.svg-flag rect {
+    fill: white;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
