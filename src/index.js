@@ -25,6 +25,7 @@ i18n.configure({
 
 // Middlewares
 app.use(cookieParser());
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: 'AnimalSocialSessionXD',
