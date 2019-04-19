@@ -18,8 +18,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    },
-    business: [ { businessId: String } ]
+    }
 })
 
 userSchema.methods.encryptPassword = (password) => {
