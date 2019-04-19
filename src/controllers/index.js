@@ -88,13 +88,8 @@ const businessPost = (req, res) => {
     newBusiness.info = req.body.info;
     newBusiness.address.city = req.body.city;
     newBusiness.address.address = req.body.address;
+    newBusiness.owner = req.app.locals.user.id;
     newBusiness.save();
-    User.findByIdAndUpdate(
-        req.app.locals.user.id,
-        { $push: { business: { businessId: newBusiness.id} } },
-        { safe: true, upsert: true },
-        (err) => { console.log(err) }
-    );
     res.redirect('back');
 }
 
