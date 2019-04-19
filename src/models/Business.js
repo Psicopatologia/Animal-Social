@@ -7,6 +7,10 @@ const businessSchema = new Schema({
     address: {
         address: String,
         city: String
+    },
+    owner: {
+        type: String,
+        required: true
     }
 });
 
