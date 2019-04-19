@@ -38,7 +38,10 @@ const signupGet = (req, res) => { res.render('pages/signup') };
 
 const signinGet = (req, res) => { res.render('pages/signin'); };
 
-const business = (req, res) => { res.render('pages/business') };
+const business = async (req, res) => {
+    const business = await Business.find({ owner: req.app.locals.user.id });
+    res.render('pages/business', { business });
+};
 
 const settings = (req, res) => { res.render('pages/settings') };
 
