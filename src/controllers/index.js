@@ -96,6 +96,22 @@ const businessPost = (req, res) => {
     res.redirect('back');
 }
 
+const uBusiness = (req, res) => {
+    Business.findByIdAndUpdate(
+        req.body.id,
+        {
+            name: req.body.name,
+            info: req.body.info,
+            address: {
+                city: req.body.city,
+                address: req.body.address
+            }
+        },
+        (err) => { if(err) console.log(err) }
+    );
+    res.redirect('back');
+};
+
 const username = (req, res) => {
     let username = req.body.username;
     User.findOne({$or: [{userName: username}, {id: username}]}, (err, user) => {
@@ -141,4 +157,5 @@ module.exports = {
     profilePost,
     username,
     password,
+    uBusiness,
 }

@@ -28,6 +28,8 @@ router.post('/signin', indexControllers.signinPost);
 
 router.post('/business', indexControllers.businessPost);
 
+router.post('/uBusiness', indexControllers.uBusiness);
+
 router.post('/profile', indexControllers.profilePost);
 
 router.post('/username', indexControllers.username);
