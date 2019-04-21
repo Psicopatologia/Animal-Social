@@ -2,6 +2,10 @@
     --nav: 2.875em;
 }
 
+body {
+    padding-top: calc(var(--nav) + 1em);
+}
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -40,6 +44,10 @@
     vertical-align: text-bottom;
 }
 
+.sidebar-sticky .svg-icon path {
+    stroke-width: 3px;
+}
+
 .sidebar .nav-link .svg-icon {
     margin-right: 4px;
     color: #999;
@@ -47,6 +55,15 @@
 
 .sidebar .nav-link:hover .svg-icon, .sidebar .nav-link.active .svg-icon {
     color: inherit;
+}
+
+.addBusiness {
+    color: #19692c !important;
+}
+
+.addBusiness path {
+    stroke-width: 2px;
+    stroke: #19692c;
 }
 
 .nav-top {
