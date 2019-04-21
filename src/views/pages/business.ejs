@@ -1,6 +1,6 @@
 <% title = __('business') %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= locale %>">
 
 <head>
     <% include ../partials/head %>
@@ -19,7 +19,7 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-columm">
                         <li class="text-capitalize nav-item mt-2 mb-2">
-                            <a class="nav-link active" href="#" data-toggle="modal" data-target="#addBusiness">
+                            <a class="nav-link addBusiness" href="#" data-toggle="modal" data-target="#addBusiness">
                                 <svg class="svg-icon" viewBox="0 0 24.956 24.956">
                                     <path d="m2.4782 12.478h20m-10-10v20" />
                                 </svg>
@@ -28,25 +28,66 @@
 
                         </li>
                         <div class="line-sidebar"></div>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <svg class="svg-icon" viewBox="0 0 25.205 25.205">
-                                    <path
-                                        d="m14.273 13.858a1.6706 1.1989 0 01-1.6706 1.1989 1.6706 1.1989 0 01-1.6706-1.1989 1.6706 1.1989 0 011.6706-1.1989 1.6706 1.1989 0 011.6706 1.1989zm-11.495.01789h8.1545m3.3392 0h8.1548m-11.956-9.5981c-.39562.002-.60355.20057-.60189.61908v1.8505h5.4677v-1.8504c.002-.41849-.20628-.61742-.6019-.61926-.0264-.00011-.0536.00077-.0816.003h-4.1007c-.028-.002-.0552-.003-.0816-.003zm-7.6923 2.5477h19.649v14.101h-19.649z" />
-                                </svg>
-                                <%= __("business") %>
-                            </a>
-                        </li>
+                        <div id="nav-business">
+                            <% for (let i = 0; i < business.length; i++) { %>
+                            <li class="nav-item">
+                                <a class="nav-link <% if (i==0) { %> active <% } %>" href="#<%= business[i].id %>" id="<%= i %>" >
+                                    <svg class="svg-icon" viewBox="0 0 25.205 25.205">
+                                        <path
+                                            d="m14.273 13.858a1.6706 1.1989 0 01-1.6706 1.1989 1.6706 1.1989 0 01-1.6706-1.1989 1.6706 1.1989 0 011.6706-1.1989 1.6706 1.1989 0 011.6706 1.1989zm-11.495.01789h8.1545m3.3392 0h8.1548m-11.956-9.5981c-.39562.002-.60355.20057-.60189.61908v1.8505h5.4677v-1.8504c.002-.41849-.20628-.61742-.6019-.61926-.0264-.00011-.0536.00077-.0816.003h-4.1007c-.028-.002-.0552-.003-.0816-.003zm-7.6923 2.5477h19.649v14.101h-19.649z" />
+                                    </svg>
+                                    <%= business[i].name %>
+                                </a>
+                            </li>
+                            <% } %>
+                        </div>
                     </ul>
                 </div>
             </nav>
             <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <h1>Business</h1>
+                <% if (business.length > 1) { %>
+                <h1 id="main-title"><%= business[0].name %></h1>
+                <form action="/uBusiness" method="POST" class="pl-5 pr-5 pt-2">
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="id">ID</label>
+                            <input class="form-control" type="text" name="id" id="id" value="<%= business[0].id %>"
+                                readonly required>
+                        </div>
+                        <div class="form-group col">
+                            <label for="newName"><%= __("name") %></label>
+                            <input class="form-control" type="text" name="name" id="newName"
+                                value="<%= business[0].name %>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-left">
+                        <label for="newInfo"><%= __("information") %></label>
+                        <textarea name="info" class="form-control" id="newInfo"
+                            rows="3"><%= business[0].info %></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="col form-group text-left">
+                            <label for="city"><%= __("city") %></label>
+                            <input type="text" class="form-control" name="city" id="city" value="<%= business[0].address.city %>" required>
+                        </div>
+                        <div class="col form-group text-left">
+                            <label for="address"><%= __("address") %></label>
+                            <input type="text" class="form-control" name="address" id="address" value="<%= business[0].address.address %>" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <%= __("update") + " " + __("business") %>
+                    </button>
+                </form>
+                <% } else { %>
+                    <h1><%= __("create a business first") %></h1>
+                <% } %>
             </main>
         </div>
     </div>
 
-    <!-- <% include ../partials/foot %> -->
+    <% include ../partials/foot %>
     <!-- Modals -->
     <div class="modal fade" id="addBusiness" tabindex="-1" role="dialog" aria-labelledby="addBusinessTitle"
         aria-hidden="true">
@@ -93,6 +134,28 @@
             </div>
         </div>
     </div>
+    <script>
+        const business = <%- JSON.stringify(business); %>; 
+    </script>
+    <script>
+        const header = document.getElementById('nav-business');
+        const navLinks = header.getElementsByClassName('nav-link');
+        for (let i = 0; i < navLinks.length; i++) {
+            navLinks[i].addEventListener('click', function () {
+                const current = header.getElementsByClassName('active');
+                current[0].classList.remove('active');
+                this.classList.add("active");
+                let hash = window.location.hash.substr(1);
+                setForm(this.id);
+            });
+        }
+        function setForm(i) {
+            document.getElementById('id').value = business[i]._id;
+            document.getElementById('newName').value = business[i].name;
+            document.getElementById('newInfo').value = business[i].info;
+            document.getElementById('main-title').innerHTML = business[i].name;
+        }
+    </script>
 </body>
 
 </html>
