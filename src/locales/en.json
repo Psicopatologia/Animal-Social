@@ -1,5 +1,6 @@
 {
 	"business": "business",
+	"businesses": "businesses",
 	"signin": "sign in",
 	"signup": "sign up",
 	"close": "close",
@@ -10,6 +11,7 @@
 	"email": "email",
 	"password": "password",
 	"add business": "add business",
+	"create a business first": "create a business first",
 	"information": "information",
 	"city": "city",
 	"address": "address",

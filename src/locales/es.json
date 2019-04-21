@@ -1,5 +1,6 @@
 {
-	"business": "negocios",
+	"business": "negocio",
+	"businesses": "negocios",
 	"signin": "ingresar",
 	"signup": "registro",
 	"close": "cerrar",
@@ -10,6 +11,7 @@
 	"email": "correo",
 	"password": "contraseña",
 	"add business": "agregar negocio",
+	"create a business first": "crea un negocio primero",
 	"information": "información",
 	"city": "ciudad",
 	"address": "dirección",
