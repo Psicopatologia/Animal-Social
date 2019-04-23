@@ -60,6 +60,16 @@ const profiles = (req, res, next) => {
     });
 }
 
+const businessPage = async (req, res, next) => {
+    let business;
+    try {
+        business = await Business.findById(req.params.business);
+        res.render('pages/businessPage', business);      
+    } catch(err) {
+        next();
+    }
+}
+
 // Post
 const signupPost = passport.authenticate('local_signup', {
     successRedirect: '/',
@@ -158,4 +168,5 @@ module.exports = {
     username,
     password,
     uBusiness,
+    businessPage,
 }

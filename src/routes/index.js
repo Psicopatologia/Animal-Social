@@ -17,6 +17,8 @@ router.get('/logout', indexControllers.logout);
 
 router.get('/u/:userName', indexControllers.profiles);
 
+router.get('/b/:business', indexControllers.businessPage);
+
 router.get('/settings', isAuth, indexControllers.settings);
 
 router.get('/business', isAuth, indexControllers.business);
