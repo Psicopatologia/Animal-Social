@@ -46,6 +46,7 @@
             </nav>
             <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <% if (business.length > 1) { %>
+                <a id="businessPage" class="float-right" href="/b/<%= business[0].id %>"><%= __("business page") %></a>
                 <h1 id="main-title"><%= business[0].name %></h1>
                 <form action="/uBusiness" method="POST" class="pl-5 pr-5 pt-2">
                     <div class="form-row">
@@ -154,6 +155,7 @@
             document.getElementById('newName').value = business[i].name;
             document.getElementById('newInfo').value = business[i].info;
             document.getElementById('main-title').innerHTML = business[i].name;
+            document.getElementById('businessPage').setAttribute('href', `/b/${business[i]._id}`);
         }
     </script>
 </body>
