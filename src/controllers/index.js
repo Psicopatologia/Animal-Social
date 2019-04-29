@@ -119,7 +119,7 @@ const uBusiness = (req, res) => {
         },
         (err) => { if(err) console.log(err) }
     );
-    res.redirect('back');
+    res.redirect(`/business#${req.body.id}`);
 };
 
 const username = (req, res) => {
