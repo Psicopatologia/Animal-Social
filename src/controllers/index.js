@@ -142,6 +142,19 @@ const events = (req, res) => {
     res.redirect(`/business#${req.body.id}`);
 }
 
+const dEvents = (req, res) => {
+    Business.findByIdAndUpdate(
+        req.body.id,
+        {
+            $pull: {
+                events: {_id: req.body.idE}
+            }
+        },
+        (err) => { if(err) console.log(err) }
+    );
+    res.redirect(`/business#${req.body.id}`);
+}
+
 const username = (req, res) => {
     let username = req.body.username;
     User.findOne({$or: [{userName: username}, {id: username}]}, (err, user) => {
@@ -190,4 +203,5 @@ module.exports = {
     uBusiness,
     businessPage,
     events,
+    dEvents,
 }
