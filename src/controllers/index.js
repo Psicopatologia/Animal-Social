@@ -122,6 +122,11 @@ const uBusiness = (req, res) => {
     res.redirect(`/business#${req.body.id}`);
 };
 
+const dBusiness = (req, res) => {
+    Business.findByIdAndDelete(req.body.id);
+    res.redirect(`/business`);
+};
+
 const events = (req, res) => {
     Business.findByIdAndUpdate(
         req.body.id,
@@ -204,4 +209,5 @@ module.exports = {
     businessPage,
     events,
     dEvents,
+    dBusiness,
 }

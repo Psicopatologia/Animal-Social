@@ -32,9 +32,11 @@ router.post('/business', indexControllers.businessPost);
 
 router.post('/uBusiness', indexControllers.uBusiness);
 
+router.post('/dBusiness', indexControllers.dBusiness);
+
 router.post('/events', indexControllers.events);
 
-router.post('/dEvents', indexControllers.uEvents);
+router.post('/dEvents', indexControllers.dEvents);
 
 router.post('/profile', indexControllers.profilePost);
 
