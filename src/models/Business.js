@@ -11,7 +11,15 @@ const businessSchema = new Schema({
     owner: {
         type: String,
         required: true
-    }
+    },
+    events: [{
+        title: String,
+        description: String,
+        date: {
+            from: Date,
+            to: Date,
+        },
+    }]
 });
 
 module.exports = mongoose.model('Business', businessSchema);
