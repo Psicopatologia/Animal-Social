@@ -122,6 +122,26 @@ const uBusiness = (req, res) => {
     res.redirect(`/business#${req.body.id}`);
 };
 
+const events = (req, res) => {
+    Business.findByIdAndUpdate(
+        req.body.id,
+        {
+            $push: {
+                events: {
+                    title: req.body.title,
+                    description: req.body.description,
+                    date: {
+                        from: new Date(req.body.dateFrom + " " + req.body.hourFrom),
+                        to: new Date(req.body.dateTo + " " + req.body.hourTo)
+                    },
+                }
+            }
+        },
+        (err) => { if(err) console.log(err) }
+    );
+    res.redirect(`/business#${req.body.id}`);
+}
+
 const username = (req, res) => {
     let username = req.body.username;
     User.findOne({$or: [{userName: username}, {id: username}]}, (err, user) => {
@@ -169,4 +189,5 @@ module.exports = {
     password,
     uBusiness,
     businessPage,
+    events,
 }
