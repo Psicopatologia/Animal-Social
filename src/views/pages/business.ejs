@@ -45,42 +45,56 @@
                 </div>
             </nav>
             <main class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <% if (business.length > 1) { %>
+                <% if (business.length >= 1) { %>
                 <a id="businessPage" class="float-right" href="/b/<%= business[0].id %>"><%= __("business page") %></a>
-                <h1 id="main-title"><%= business[0].name %></h1>
+                <h1 id="main-title"></h1>
                 <form action="/uBusiness" method="POST" class="pl-5 pr-5 pt-2">
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="id">ID</label>
-                            <input class="form-control" type="text" name="id" id="id" value="<%= business[0].id %>"
+                            <input class="form-control" type="text" name="id" id="id" value=""
                                 readonly required>
                         </div>
                         <div class="form-group col">
                             <label for="newName"><%= __("name") %></label>
                             <input class="form-control" type="text" name="name" id="newName"
-                                value="<%= business[0].name %>" required>
+                                value="" required>
                         </div>
                     </div>
 
                     <div class="form-group text-left">
                         <label for="newInfo"><%= __("information") %></label>
                         <textarea name="info" class="form-control" id="newInfo"
-                            rows="3"><%= business[0].info %></textarea>
+                            rows="3"></textarea>
                     </div>
                     <div class="form-row">
                         <div class="col form-group text-left">
                             <label for="city"><%= __("city") %></label>
-                            <input type="text" class="form-control" name="city" id="city" value="<%= business[0].address.city %>" required>
+                            <input type="text" class="form-control" name="city" id="newCity" value="" required>
                         </div>
                         <div class="col form-group text-left">
                             <label for="address"><%= __("address") %></label>
-                            <input type="text" class="form-control" name="address" id="address" value="<%= business[0].address.address %>" required>
+                            <input type="text" class="form-control" name="address" id="newAddress" value="" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         <%= __("update") + " " + __("business") %>
                     </button>
                 </form>
+                <button class="btn bg-danger text-light m-3 ml-5" data-toggle="modal" data-target="#delBusiness">
+                    <%= __("delete") + " " + __("business") %>
+                </button>
+                <hr>
+                <span class="h3 text-capitalize">
+                    <%= __("events") %>
+                </span>
+                <a class="float-right addBusiness" href="#" data-toggle="modal" data-target="#addEvent">
+                    <svg class="svg-icon" viewBox="0 0 24.956 24.956">
+                        <path d="m2.4782 12.478h20m-10-10v20" />
+                    </svg>
+                    <%= __("add event") %>
+                </a>
+                <div id="events" class="m-2"></div>
                 <% } else { %>
                     <h1><%= __("create a business first") %></h1>
                 <% } %>
@@ -124,40 +138,159 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <%= __("add business") %>
+                            </button>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= __("close") %></button>
-                    <button type="submit" class="btn btn-primary" form="addBusinessForm">
-                        <%= __("add business") %>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="addEventTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-capitalize" id="addEventTitle"><%= __("add event") %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
+                </div>
+                <div class="modal-body font-weight-light">
+                    <form action="/events" method="POST">
+                        <div class="d-none">
+                            <input type="text" name="id" id="idE" value="">
+                        </div>
+                        <div class="form-group text-left">
+                            <label for="title"><%= __("title") %></label>
+                            <input type="text" class="form-control" name="title" id="title" required autofocus>
+                        </div>
+                        <div class="form-group text-left">
+                            <label for="description"><%= __("description") %></label>
+                            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                        </div>
+                        <span class="font-weight-bolder"><%= __("from") + ": " %></span>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="dateFrom"><%= __("date") %></label>
+                                    <input type="date" class="form-control" name="dateFrom" id="dateFrom" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="hourFrom"><%= __("hours") %></label>
+                                    <input type="time" class="form-control" name="hourFrom" id="hourFrom" required>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="font-weight-bolder"><%= __("to") + ": " %></span>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="dateTo"><%= __("date") %></label>
+                                    <input type="date" class="form-control" name="dateTo" id="dateTo" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="hourTo"><%= __("hours") %></label>
+                                    <input type="time" class="form-control" name="hourTo" id="hourTo" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <%= __("add event") %>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delBusiness" tabindex="-1" role="dialog" aria-labelledby="delBusinessLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delBusinessLabel"><%= __("sure?") %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <form action="/dBusiness" method="post">
+                        <div class="d-none">
+                            <input type="text" name="id" id="idD" value="">
+                        </div>
+                        <button type="submit" class="btn bg-danger text-light"><%= __("delete")%></button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= __("close") %></button>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        const business = <%- JSON.stringify(business); %>; 
+        const business = <%- JSON.stringify(business); %>;
+    </script>
+    <script>
+        const del = "<%- __("delete") %>"; 
     </script>
     <script>
         const header = document.getElementById('nav-business');
         const navLinks = header.getElementsByClassName('nav-link');
+        let hash = window.location.hash.substr(1);
         for (let i = 0; i < navLinks.length; i++) {
             navLinks[i].addEventListener('click', function () {
                 const current = header.getElementsByClassName('active');
                 current[0].classList.remove('active');
                 this.classList.add("active");
-                let hash = window.location.hash.substr(1);
                 setForm(this.id);
             });
         }
+        if (hash) {
+            let index = business.findIndex((o) => {return o._id == hash});
+            if (index >= 0)
+                navLinks[index].click();
+        } else if (business.length > 0) {
+            navLinks[0].click();
+        }
         function setForm(i) {
             document.getElementById('id').value = business[i]._id;
+            document.getElementById('idD').value = business[i]._id;
+            document.getElementById('idE').value = business[i]._id;
             document.getElementById('newName').value = business[i].name;
             document.getElementById('newInfo').value = business[i].info;
+            document.getElementById('newCity').value = business[i].address.city;
+            document.getElementById('newAddress').value = business[i].address.address;
             document.getElementById('main-title').innerHTML = business[i].name;
             document.getElementById('businessPage').setAttribute('href', `/b/${business[i]._id}`);
+            let events = "";
+            if (business[i].events.length > 0) {
+                for (let j = business[i].events.length-1; j >= 0; j--) {
+                    events += `<div class="card  mb-2" id="${business[i].events[j]._id}">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    ${business[i].events[j].title}
+                                </h5>
+                                <p class="card-text">
+                                    ${business[i].events[j].description}
+                                </p>
+                                <form action="/dEvents" method="post">
+                                    <div class="d-none">
+                                        <input type="text" name="id" value="${business[i]._id}">
+                                        <input type="text" name="idE" value="${business[i].events[j]._id}">
+                                    </div>
+                                    <button class="btn bg-danger text-light" type="submit">${del}</button>
+                                </form>
+                            </div>
+                        </div>`
+                }
+            }
+            document.getElementById('events').innerHTML = events;
         }
     </script>
 </body>
-
 </html>
