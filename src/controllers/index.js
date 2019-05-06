@@ -123,7 +123,9 @@ const uBusiness = (req, res) => {
 };
 
 const dBusiness = (req, res) => {
-    Business.findByIdAndDelete(req.body.id);
+    Business.findByIdAndDelete(req.body.id, (err) => {
+        if (err) console.log(err);
+    });
     res.redirect(`/business`);
 };
 
