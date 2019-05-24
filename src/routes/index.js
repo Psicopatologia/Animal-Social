@@ -5,8 +5,6 @@ const indexControllers = require('../controllers/index')
 // Get 
 router.get('/', indexControllers.index);
 
-router.get('/:page', indexControllers.index);
-
 router.get('/lang/:lang', indexControllers.lang);
 
 router.get('/signup', indexControllers.signupGet);
@@ -16,6 +14,10 @@ router.get('/signin', indexControllers.signinGet);
 router.get('/logout', indexControllers.logout);
 
 router.get('/u/:userName', indexControllers.profiles);
+
+router.get('/b', indexControllers.showBusiness);
+
+router.get('/b/:page', indexControllers.showBusiness);
 
 router.get('/b/:business', indexControllers.businessPage);
 
