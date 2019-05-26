@@ -3,7 +3,10 @@ const Business = require('../models/Business');
 const passport = require('passport');
 
 // Get
-const index = (req, res, next) => {
+
+const index = (req, res) => { res.render('pages/index'); };
+
+const showBusiness = (req, res, next) => {
     let perPage = 12
     if (req.params.page) {
         if (isNaN(req.params.page)) {
@@ -19,7 +22,7 @@ const index = (req, res, next) => {
         .exec((err, business) => {
             Business.estimatedDocumentCount().exec((err, count) => {
                 if (err) console.log(err);
-                res.render('pages/index', {
+                res.render('pages/showBusiness', {
                     business: business,
                     current: page,
                     pages: Math.ceil(count / perPage),
@@ -194,6 +197,7 @@ const password = (req, res) => {
 
 module.exports = {
     index,
+    showBusiness,
     signupGet,
     signupPost,
     signinGet,
