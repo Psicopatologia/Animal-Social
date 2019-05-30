@@ -2,17 +2,96 @@
     transition: all .2s ease-in-out;
 }
 
+.bg-primary {
+    background-color: #33313b !important;
+}
+
+.color-primary {
+    color: #33313b !important;
+}
+
+.bg-info {
+    background-color: #4592af !important;
+}
+
+.bg-danger, .btn-danger {
+    background-color: #AD0700 !important;
+    border-color: #AD0700 !important;
+}
+
+.btn-danger:hover {
+    background-color: rgba(173, 6, 0, 0.9) !important;
+    border-color: rgba(173, 6, 0, 0.9);
+}
+
+.btn:active {
+    border-color: #2f6073 !important;
+    background-color: #2f6073 !important;
+}
+
+button.bg-info:hover {
+    background-color: #2f6073 !important;
+}
+
 html {
     position: relative;
     min-height: 100%;
 }
 
 body {
+    background-color: #f6f5f5;
     padding-bottom: 50px;
 }
 
 .dropdown {
     text-transform: capitalize;
+}
+
+.btn-primary {
+    border-color: #33313b;
+    background-color: #33313b;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    border-color: #4592af !important;
+    background-color: #4592af !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #4592af;
+}
+
+a {
+    color: #4592af;
+}
+
+a:hover {
+    color: rgba(69, 147, 175, 0.9)
+}
+
+.navbar-brand {
+    animation-name: logo;
+    animation-duration: .5s;
+}
+
+@keyframes logo {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.svg-logo-dark circle {
+    fill: #f6f5f5;
+}
+
+.svg-logo-dark tspan {
+    fill: #33313b;
+    font-family: sans-serif;
+    font-size: 10.443px;
+    stroke-width: .10879
 }
 
 .svg-icon {
@@ -39,5 +118,5 @@ body {
     bottom: 0;
     width: 100%;
     height: 50px;
-    background-color: #f5f5f5;
+    background-color: #e2e1e1;
 }
