@@ -6,6 +6,10 @@ body {
     padding-top: calc(var(--nav) + 1em);
 }
 
+.toggler-business {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 .sidebar {
     position: fixed;
     top: 0;
@@ -27,11 +31,11 @@ body {
 
 .sidebar .nav-link {
     font-weight: 500;
-    color: #333;
+    color: #33313b;
 }
 
 .sidebar .nav-link.active {
-    color: #007bff;
+    color: #4592af;
 }
 
 .line-sidebar {
@@ -58,12 +62,12 @@ body {
 }
 
 .addBusiness {
-    color: #19692c !important;
+    color: #187A12 !important;
 }
 
 .addBusiness path {
     stroke-width: 2px;
-    stroke: #19692c;
+    stroke: #187A12;
 }
 
 .nav-top {
