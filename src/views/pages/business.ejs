@@ -15,7 +15,15 @@
     </header>
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarBusiness"
+                aria-controls="navbarnavbarBusiness" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon toggler-business"></span>
+            </button>
+            <nav class="col-md-2 collapse d-md-block bg-light sidebar" id="navbarBusiness" data-target="#navbarBusiness">
+                <button class="navbar-toggler mt-2 float-right d-block d-sm-none" type="button" data-toggle="collapse" data-target="#navbarBusiness"
+                    aria-controls="navbarnavbarBusiness" aria-expanded="false" aria-label="Toggle navigation">
+                    <span aria-hidden="true" class="nav-link">&times;</span>
+                </button>
                 <div class="sidebar-sticky">
                     <ul class="nav flex-columm">
                         <li class="text-capitalize nav-item mt-2 mb-2">
@@ -81,9 +89,6 @@
                         <%= __("update") + " " + __("business") %>
                     </button>
                 </form>
-                <button class="btn bg-danger text-light m-3 ml-5" data-toggle="modal" data-target="#delBusiness">
-                    <%= __("delete") + " " + __("business") %>
-                </button>
                 <hr>
                 <span class="h3 text-capitalize">
                     <%= __("events") %>
@@ -95,6 +100,10 @@
                     <%= __("add event") %>
                 </a>
                 <div id="events" class="m-2"></div>
+                <hr>
+                <button class="btn btn-danger m-1 ml-5 f-right" data-toggle="modal" data-target="#delBusiness">
+                        <%= __("delete") + " " + __("business") %>
+                </button>
                 <% } else { %>
                     <h1><%= __("create a business first") %></h1>
                 <% } %>
@@ -232,11 +241,73 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="editEvent" tabindex="-1" role="dialog" aria-labelledby="editEventTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-capitalize" id="editEventTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body font-weight-light">
+                    <form action="/uEvent" method="POST">
+                        <div class="d-none">
+                            <input type="text" name="idE" id="iEve" value="">
+                        </div>
+                        <div class="form-group text-left">
+                            <label for="title"><%= __("title") %></label>
+                            <input type="text" class="form-control" name="title" id="uTitle" required autofocus>
+                        </div>
+                        <div class="form-group text-left">
+                            <label for="description"><%= __("description") %></label>
+                            <textarea name="description" class="form-control" id="uDescription" rows="3"></textarea>
+                        </div>
+                        <span class="font-weight-bolder"><%= __("from") + ": " %></span>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="dateFrom"><%= __("date") %></label>
+                                    <input type="date" class="form-control" name="dateFrom" id="uDateFrom" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="hourFrom"><%= __("hours") %></label>
+                                    <input type="time" class="form-control" name="hourFrom" id="uHourFrom" required>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="font-weight-bolder"><%= __("to") + ": " %></span>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="dateTo"><%= __("date") %></label>
+                                    <input type="date" class="form-control" name="dateTo" id="dateTo" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group text-left">
+                                    <label for="hourTo"><%= __("hours") %></label>
+                                    <input type="time" class="form-control" name="hourTo" id="hourTo" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <%= __("edit") %>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         const business = <%- JSON.stringify(business); %>;
-    </script>
-    <script>
         const del = "<%- __("delete") %>"; 
+        const ed = "<%- __("edit") %>";
     </script>
     <script>
         const header = document.getElementById('nav-business');
@@ -268,29 +339,54 @@
             document.getElementById('main-title').innerHTML = business[i].name;
             document.getElementById('businessPage').setAttribute('href', `/b/${business[i]._id}`);
             let events = "";
+            document.getElementById('events').innerHTML = events;
             if (business[i].events.length > 0) {
                 for (let j = business[i].events.length-1; j >= 0; j--) {
-                    events += `<div class="card  mb-2" id="${business[i].events[j]._id}">
+                    business[i].events[j].date.from = new Date(business[i].events[j].date.from);
+                    business[i].events[j].date.to = new Date(business[i].events[j].date.to);
+                    events += `<div class="card  mb-2">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     ${business[i].events[j].title}
+                                    <div class="float-right mr-1">
+                                        <button class="btn bg-info text-light edit-event" id="${business[i].events[j]._id}" data-toggle="modal" data-target="#editEvent">${ed}</button>
+                                        <form class="d-inline-block" action="/dEvents" method="post">
+                                            <div class="d-none">
+                                                <input type="text" name="id" value="${business[i]._id}">
+                                                <input type="text" name="idE" value="${business[i].events[j]._id}">
+                                            </div>
+                                            <button class="btn btn-danger" type="submit">${del}</button>
+                                        </form>
+                                    <div>
                                 </h5>
                                 <p class="card-text">
                                     ${business[i].events[j].description}
                                 </p>
-                                <form action="/dEvents" method="post">
-                                    <div class="d-none">
-                                        <input type="text" name="id" value="${business[i]._id}">
-                                        <input type="text" name="idE" value="${business[i].events[j]._id}">
-                                    </div>
-                                    <button class="btn bg-danger text-light" type="submit">${del}</button>
-                                </form>
                             </div>
                         </div>`
                 }
+                document.getElementById('events').innerHTML = events;
+                let header = document.getElementById('events');
+                let editbuttons = header.getElementsByClassName('edit-event');
+                for (let k = 0; k < editbuttons.length; k++) {
+                    editbuttons[k].addEventListener('click', function () {
+                        setModalEventForm(i, business[i].events.findIndex(x => x._id === this.id));
+                    });
+                }
             }
-            document.getElementById('events').innerHTML = events;
+        }
+        function setModalEventForm(i, j) {
+            console.log(business[i].events[j].date.from);
+            console.log(business[i].events[j].date.from.toLocaleString().slice(0,10).replace(/\//g, '-'));
+            document.getElementById('iEve').value = business[i].events[j]._id;
+            document.getElementById('uTitle').value = business[i].events[j].title;
+            document.getElementById('editEventTitle').innerHTML = business[i].events[j].title;
+            document.getElementById('uDescription').value = business[i].events[j].description;
         }
     </script>
+    
+    <script>
+            console.log(business)    
+        </script>
 </body>
 </html>
