@@ -132,6 +132,23 @@ const dBusiness = (req, res) => {
     res.redirect(`/business`);
 };
 
+const commentB = (req, res) => {
+    Business.findByIdAndUpdate(
+        req.body.id,
+        {
+            $push: {
+                comments: {
+                    user: req.body.user,
+                    name: req.body.name,
+                    comment: req.body.comment,
+                }
+            }
+        },
+        (err) => { if(err) console.log(err) }
+    );
+    res.redirect(`back`);
+}
+
 const events = (req, res) => {
     Business.findByIdAndUpdate(
         req.body.id,
@@ -150,6 +167,19 @@ const events = (req, res) => {
         (err) => { if(err) console.log(err) }
     );
     res.redirect(`/business#${req.body.id}`);
+}
+
+const uEvent = async (req, res) => {
+    console.log(req.body.idE);
+    console.log(req.body.idB);
+    const eve = await Business.updateOne({'events._id': req.body.idE},
+        {
+            '$set': {
+                'events.$.description': "coco",
+            }
+        }, err => console.log(err)
+    )
+    console.log(eve);
 }
 
 const dEvents = (req, res) => {
@@ -212,8 +242,10 @@ module.exports = {
     username,
     password,
     uBusiness,
+    commentB,
     businessPage,
     events,
     dEvents,
+    uEvent,
     dBusiness,
 }

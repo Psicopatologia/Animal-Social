@@ -36,9 +36,13 @@ router.post('/uBusiness', indexControllers.uBusiness);
 
 router.post('/dBusiness', indexControllers.dBusiness);
 
+router.post('/commentB', indexControllers.commentB);
+
 router.post('/events', indexControllers.events);
 
 router.post('/dEvents', indexControllers.dEvents);
+
+router.post('/uEvent', indexControllers.uEvent);
 
 router.post('/profile', indexControllers.profilePost);
 
