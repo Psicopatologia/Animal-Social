@@ -8,6 +8,11 @@ const businessSchema = new Schema({
         address: String,
         city: String
     },
+    comments: [{
+        user: String,
+        name: String,
+        comment: String
+    }],
     owner: {
         type: String,
         required: true
@@ -19,6 +24,12 @@ const businessSchema = new Schema({
             from: Date,
             to: Date,
         },
+        interested: {
+            n: Number,
+            ids: [{
+                type: String
+            }]
+        }
     }]
 });
 
