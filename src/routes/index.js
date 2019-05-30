@@ -25,6 +25,10 @@ router.get('/settings', isAuth, indexControllers.settings);
 
 router.get('/business', isAuth, indexControllers.business);
 
+router.get('/e', indexControllers.showEvents);
+
+router.get('/e/:page', indexControllers.showEvents);
+
 // Post
 router.post('/signup', indexControllers.signupPost);
 
@@ -41,6 +45,8 @@ router.post('/commentB', indexControllers.commentB);
 router.post('/events', indexControllers.events);
 
 router.post('/dEvents', indexControllers.dEvents);
+
+router.post('/iEvent', indexControllers.iEvent);
 
 router.post('/uEvent', indexControllers.uEvent);
 
