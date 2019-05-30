@@ -4,7 +4,7 @@ const passport = require('passport');
 
 // Get
 
-const index = (req, res) => { res.render('pages/index'); };
+const index = (req, res) => { res.redirect('/b'); };
 
 const showBusiness = (req, res, next) => {
     let perPage = 12
@@ -23,6 +23,31 @@ const showBusiness = (req, res, next) => {
             Business.estimatedDocumentCount().exec((err, count) => {
                 if (err) console.log(err);
                 res.render('pages/showBusiness', {
+                    business: business,
+                    current: page,
+                    pages: Math.ceil(count / perPage),
+                });
+            });
+        });
+};
+
+const showEvents = (req, res, next) => {
+    let perPage = 12
+    if (req.params.page) {
+        if (isNaN(req.params.page)) {
+            return next()
+        };
+    }
+    let page = req.params.page || 1;
+    Business
+        .find({}, 'events')
+        .sort({ _id: -1 })
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec((err, business) => {
+            Business.estimatedDocumentCount().exec((err, count) => {
+                if (err) console.log(err);
+                res.render('pages/showEvents', {
                     business: business,
                     current: page,
                     pages: Math.ceil(count / perPage),
@@ -170,16 +195,18 @@ const events = (req, res) => {
 }
 
 const uEvent = async (req, res) => {
-    console.log(req.body.idE);
     console.log(req.body.idB);
     const eve = await Business.updateOne({'events._id': req.body.idE},
         {
             '$set': {
-                'events.$.description': "coco",
+                'events.$.description': req.body.description,
+                'events.$.title': req.body.title,
+                'events.$.date.from': new Date(req.body.dateFrom + " " + req.body.hourFrom),
+                'events.$.date.to': new Date(req.body.dateTo + " " + req.body.hourTo),
             }
         }, err => console.log(err)
     )
-    console.log(eve);
+    res.redirect('back');
 }
 
 const dEvents = (req, res) => {
@@ -193,6 +220,20 @@ const dEvents = (req, res) => {
         (err) => { if(err) console.log(err) }
     );
     res.redirect(`/business#${req.body.id}`);
+}
+
+const iEvent = async (req, res) => {
+    await Business.updateOne({'events._id': req.body.id},
+        {
+            '$inc': {
+                'events.$.interested.n': 1
+            },
+            '$push': {
+                'events.$.interested.ids': req.body.idUser,
+            }
+        }, err => console.log(err)
+    )
+    res.redirect('back')
 }
 
 const username = (req, res) => {
@@ -228,6 +269,8 @@ const password = (req, res) => {
 module.exports = {
     index,
     showBusiness,
+    showEvents,
+    iEvent,
     signupGet,
     signupPost,
     signinGet,
