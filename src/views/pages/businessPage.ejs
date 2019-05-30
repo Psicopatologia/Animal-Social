@@ -8,33 +8,86 @@
     <header>
         <% include ../partials/header %>
     </header>
-    <main class="container mt-3">
-        <h1 class="h3"><%= name %></h1>
-        <p class="text-muted"><%= address.city %> - <%= address.address %></p>
-        <div class="bio">
-            <%= info %>
+    <main class="container mt-3 mb-5">
+        <div class="row">
+            <h1 class="h3"><%= name %></h1>
         </div>
-        <%if (events.length > 0) { %>
-        <br>
-        <h2 class="text-capitalize h4"><%= __("events") %></h2>
-        <% for (let i = events.length-1; i >= 0; i--) { %>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <%= events[i].title %>
-                </h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    <%= events[i].date.from.toLocaleString()
-                    + " / " +
-                    events[i].date.to.toLocaleString() %>
-                </h6>
-                <p class="card-text">
-                    <%= events[i].description %>
-                </p>
+        <div class="row">
+            <div class="col">
+                <p class="text-muted"><%= address.city %> - <%= address.address %></p>
+                <div class="bio mb-5">
+                    <%= info %>
+                </div>
+                <% if (user) { %>
+                <form action="/commentB" method="post" class="mb-5">
+                    <h2 class="h4">
+                        Comentarios
+                    </h2>
+                    <div class="d-none">
+                        <input type="text" name="id" value="<%= id %>">
+                        <input type="text" name="user" value="<%= user.userName %>">
+                        <input type="text" name="name" value="<%= user.name %>">
+                    </div>
+                    <textarea class="form-control" name="comment" rows="3"></textarea>
+                    <button type="submit" class="btn btn-primary float-right">comentar</button>
+                </form>
+                <% } %>
+                <% for (let i = comments.length-1; i >= 0; i--) { %>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <a href="/u/<%= comments[i].user %>"><%= comments[i].name %></a>
+                        </h6>
+                        <p class="card-text">
+                            <%= comments[i].comment %>
+                        </p>
+                    </div>
+                </div>
+                <% } %>
+            </div>   
+            <div class="col">
+                <h2 class="text-capitalize h4"><%= __("events") %></h2>
+                <%if (events.length > 0) { %>
+                <% for (let i = events.length-1; i >= 0; i--) { %>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="float-right">
+                            <svg class="svg-icon" viewBox="0 0 26.012 26.012">
+                                <path 
+                                d="m22.821 22.82h-19.629c0-5.4263 4.3941-9.8252 9.8145-9.8252 5.4204 0 9.8145 4.3989 9.8145 9.8252zm-4.9073-14.716a4.9072 4.9125 0 01-4.9072 4.9125 4.9072 4.9125 0 01-4.9072-4.9125 4.9072 4.9125 0 014.9072-4.9125 4.9072 4.9125 0 014.9072 4.9125z" />
+                            </svg>
+                            <%= events[i].interested.n %>
+                        </div>
+                        <h5 class="card-title">
+                            <%= events[i].title %>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <%= events[i].date.from.toLocaleString()
+                            + " / " +
+                            events[i].date.to.toLocaleString() %>
+                        </h6>
+                        <p class="card-text">
+                            <%= events[i].description %>
+                        </p>
+                        <% if(user) { %>
+                        <% if(!events[i].interested.ids.includes(user._id.toString())) { %>
+                        <form action="/iEvent" method="post">
+                            <div class="d-none">
+                                <input type="text" name="id" value="<%= events[i]._id %>">
+                                <input type="text" name="idUser" value="<%= user._id %>">
+                            </div>
+                            <button type="submit" class="btn btn-primary"><%= __("interested") %></button>
+                        </form>
+                        <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <% } %>
+                <% } else {%>
+                    <p>...</p>
+                <% } %>
             </div>
         </div>
-        <% } %>
-        <% } %>
     </main>
     <% include ../partials/foot %>
 </body>
