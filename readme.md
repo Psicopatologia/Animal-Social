@@ -1,15 +1,15 @@
 # Animal Social
 
-Animal Social ayuda a usuarios a organizar sus salidas sociales.
+Animal Social helps users plan their social gatherings. Using Node.js, Express.js, Passport and mogoose
 
 ### Autor
 
 Sebastian Orozco
 
-sebastian.orozcog@upb.edu.co
+sebastianorozcogomez@upb.edu.co
 
-### Información adicional
+### Additional information
 
-**Trabajo para:** Proyecto aplicado en TIC 1
+**Work for:** Proyecto aplicado en TIC 1
 
-Universidad pontificia boliavariaa
+Universidad pontificia boliavariana
